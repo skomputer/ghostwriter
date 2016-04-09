@@ -2,13 +2,17 @@
   "name": "ghostwriter",
   "version": "0.0.1",
   "description": "write free",
-  "main": "index.js",
+  "author": "matthew skomarovsky",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skomputer/ghostwriter.git"
+  },
+  "main": "index.jsx",
   "scripts": {
     "dev": "webpack-dev-server --progress --history-api-fallback --hot --content-base build --port 8090 --config webpack.dev.config.js",
     "build": "webpack -p --optimize-dedupe --config webpack.prod.config.js"
   },
-  "author": "matthew skomarovsky",
-  "license": "GPL-3.0",
   "devDependencies": {
     "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
