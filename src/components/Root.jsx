@@ -17,7 +17,8 @@ export default class Root extends React.Component {
           ref="graph"
           width={this.state.width} 
           height={this.state.height}
-          numPoints={this.props.numPoints} />
+          numPoints={this.props.numPoints}
+          image={this.props.image} />
       </div>
     );
   }
@@ -75,7 +76,7 @@ export default class Root extends React.Component {
   }
 
   handleKeyup(event) {
-    if (!this.hasCtrlKey(event) && event.code !== "KeyA" && !this.isCtrlKey(event)) {
+    if (!this.hasCtrlKey(event) && !this.isCtrlKey(event)) {
       this.stopAnimation();
     }
   }
