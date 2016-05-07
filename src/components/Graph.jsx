@@ -16,7 +16,10 @@ export default class Graph extends React.Component {
 
   render() {
     return (
-      <svg width={this.state.width} height={this.state.height} xmlns="http://www.w3.org/2000/svg">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg"
+        width={this.state.width} 
+        height={this.state.height}>
         <defs>
           { this.props.image && 
             <ImagePattern 
@@ -26,7 +29,10 @@ export default class Graph extends React.Component {
               imageHref={this.props.image} />
           }
         </defs>
-        <Curve points={this.state.points} />
+        <Curve 
+          points={this.state.points} 
+          color={this.props.color} 
+          thickness={this.props.thickness} />
       </svg>
     );
   }

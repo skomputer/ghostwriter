@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Graph from "./Graph";
 import { complexTimeWave } from "../util/math";
+import screenfull from "screenfull";
 
 export default class Root extends React.Component {
   constructor(props) {
@@ -17,17 +18,16 @@ export default class Root extends React.Component {
           ref="graph"
           width={this.state.width} 
           height={this.state.height}
+          color={this.props.color}
+          thickness={this.props.thickness}
           numPoints={this.props.numPoints}
           image={this.props.image} />
       </div>
     );
   }
 
-  componentWillMount() {
-    this.updateGraphSize();
-  }
-
   componentDidMount() {
+    this.updateGraphSize();
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
     window.addEventListener("resize", this.handleResize.bind(this));
@@ -57,8 +57,19 @@ export default class Root extends React.Component {
     this.animationId ? this.stopAnimation() : this.startAnimation();
   }
 
+  parentNode() {
+    return ReactDOM.findDOMNode(this).parentNode;
+  }
+
   updateGraphSize() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    let parent = this.parentNode();
+    this.setState({ width: parent.clientWidth, height: parent.clientHeight });
+  }
+
+  toggleFullscreen() {
+    if (screenfull.enabled) {
+      screenfull.toggle();
+    }
   }
 
   handleKeydown(event) {
@@ -69,6 +80,9 @@ export default class Root extends React.Component {
     if (this.hasCtrlKey(event)) {
       if (event.code === "KeyA" || event.keyCode === 65) {
         this.toggleAnimation();
+      } else if (event.code === "KeyF" || event.keyCode === 70) {
+        event.preventDefault();
+        this.toggleFullscreen();
       }
     } else {
       this.startAnimation();

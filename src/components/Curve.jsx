@@ -18,8 +18,8 @@ export default class Curve extends React.Component {
         { singlePath ? 
           <path 
             d={this.singlePathDescription()} 
-            stroke="url(#curvePattern) black"
-            strokeWidth={5}
+            stroke={`url(#curvePattern) ${this.props.color || "white"}`}
+            strokeWidth={this.props.thickness || 5}
             strokeLinecap="round"
             fill="transparent" /> :
           ( this.state.paths.length > 0 && 
